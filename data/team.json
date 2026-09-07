@@ -3,14 +3,112 @@
     "id": "sarah",
     "name": "Sarah",
     "role": "Principal Instructor",
-    "photo": "",
-    "photoPosition": "50% 30%",
-    "intro": "Sarah has been instructing since 2000 and is an examiner for the Royal Kennel Club Good Citizen Dog Scheme at all levels. She is also a canine first aider.",
+    "photo": "assets/images/team/sarah.png",
+    "photoPosition": "50% 35%",
+    "intro": "Sarah is the Principal Instructor and has been instructing since 2000. She is a canine first aider and an examiner for the Royal Kennel Club Good Citizen Dog Scheme at all levels.",
     "detail": "Her current dogs are rescue crossbreed Dougal, who has his Gold GCDS and a Bronze sniffer dog award, and Norfolk terrier Toby, who has his Bronze GCDS and eight first places at Crufts.",
     "chips": [
       "Instructing since 2000",
       "RKC GCDS Examiner",
       "Canine First Aider"
+    ]
+  },
+  {
+    "id": "su",
+    "name": "Su",
+    "role": "Daytime Instructor",
+    "photo": "assets/images/team/su.png",
+    "photoPosition": "50% 35%",
+    "intro": "Su has been a daytime Instructor at CHeWs since 2018. She is a lifelong dog owner and currently has Alfie, a Labrador/Poodle/Bearded Collie cross who has his Gold and is a therapy dog.",
+    "detail": "Su is a canine first aider and instructs at all levels of the R.K.C.G.C.D.S.",
+    "chips": [
+      "With CHeWs since 2018",
+      "All levels",
+      "Canine First Aider"
+    ]
+  },
+  {
+    "id": "tony",
+    "name": "Tony",
+    "role": "Senior Daytime Instructor",
+    "photo": "assets/images/team/tony.png",
+    "photoPosition": "50% 35%",
+    "intro": "Tony is an ex steel worker, photographer, sailing instructor and retired science teacher, as well as a lifelong dog owner. He has been at CHeWs since 2013.",
+    "detail": "His dogs include Apollo, a Springer Spaniel cross with Gold GCDS, and Chester, a mixed breed rescue with Silver GCDS. Tony is a canine first aider and a Silver R.K.C.G.C.D.S assessor.",
+    "chips": [
+      "With CHeWs since 2013",
+      "Senior Instructor",
+      "Silver Assessor"
+    ]
+  },
+  {
+    "id": "ben",
+    "name": "Ben",
+    "role": "Mixed Ability Instructor",
+    "photo": "assets/images/team/ben.png",
+    "photoPosition": "50% 35%",
+    "intro": "Ben completed three years of animal care and management at college. After completing two weeks' work experience with CHeWs, he decided to stay and become a Mixed Ability Instructor.",
+    "detail": "He covers classes and assists instructors at all levels. Ben is a canine first aider and a Bronze R.K.C.G.C.D.S assessor.",
+    "chips": [
+      "Animal Care & Management",
+      "Mixed Ability",
+      "Bronze Assessor"
+    ]
+  },
+  {
+    "id": "cliff",
+    "name": "Cliff",
+    "role": "Instructor",
+    "photo": "assets/images/team/cliff.png",
+    "photoPosition": "50% 35%",
+    "intro": "Cliff is a retired BT technician and manager. He and Kova, a yellow Labrador Retriever with Gold GCDS and a Bronze sniffer dog award, joined CHeWs in 2017.",
+    "detail": "They won the Joyce Dobson Shield for Dedication to Training in 2019. Cliff is a canine first aider, instructor and R.K.C.G.C.D.S assessor at all levels.",
+    "chips": [
+      "With CHeWs since 2017",
+      "All-level Assessor",
+      "Canine First Aider"
+    ]
+  },
+  {
+    "id": "rebecca",
+    "name": "Rebecca",
+    "role": "Gold / Platinum Instructor",
+    "photo": "assets/images/team/rebecca.png",
+    "photoPosition": "50% 35%",
+    "intro": "Rebecca has been with CHeWs since it opened. She is a well-respected dog groomer and is the Wednesday Gold/Platinum instructor at CHeWs.",
+    "detail": "Rebecca was until recently owned by Harley, a Cavalier/Bichon cross who achieved Gold GCDS. Rebecca is a canine first aider and R.K.C.G.C.D.S Bronze assessor.",
+    "chips": [
+      "With CHeWs since opening",
+      "Gold / Platinum",
+      "Bronze Assessor"
+    ]
+  },
+  {
+    "id": "martin",
+    "name": "Martin",
+    "role": "Instructor",
+    "photo": "assets/images/team/martin.png",
+    "photoPosition": "50% 35%",
+    "intro": "Martin is a mechanical and electrical engineer working within healthcare. He is owned by Merlin, an English Springer Spaniel with Gold GCDS who worked as a search and rescue dog until recently retiring.",
+    "detail": "Martin has completed multiple Institute of Modern Dog Trainers courses, including puppy training, and studies motivation and positive reinforcement. He is a canine first aider and instructor at all levels.",
+    "chips": [
+      "IMDT Training",
+      "All levels",
+      "Canine First Aider"
+    ]
+  },
+  {
+    "id": "trevor",
+    "name": "Trevor",
+    "role": "Team Support",
+    "photo": "assets/images/team/trevor.png",
+    "photoPosition": "50% 35%",
+    "intro": "Trevor is CHeWs' resident tea and coffee maker, mop monitor and joke teller.",
+    "detail": "He manages the hall maintenance and garden for the Church hall and assists with classes and all of CHeWs' fundraising events.",
+    "chips": [
+      "Class Support",
+      "Fundraising",
+      "Hall Maintenance"
     ]
   }
 ]
