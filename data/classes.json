@@ -1,0 +1,146 @@
+{
+  "venues": [
+    {
+      "id": "st-edmunds",
+      "name": "St Edmunds Church",
+      "shortName": "St Edmunds",
+      "address": "216 Chingford Mount Road, London E4 8JL",
+      "mapsQuery": "St Edmunds Church, 216 Chingford Mount Road, London E4 8JL",
+      "tone": "teal",
+      "label": "St Edmunds"
+    },
+    {
+      "id": "new-road",
+      "name": "New Road Methodist Church",
+      "shortName": "New Road Methodist",
+      "address": "New Road, London E4 9EU",
+      "mapsQuery": "New Road Methodist Church, New Road, London E4 9EU",
+      "tone": "amber",
+      "label": "New Road Methodist"
+    }
+  ],
+  "schedule": [
+    {
+      "day": "Monday",
+      "time": "09:30",
+      "class": "Gold",
+      "venueId": "st-edmunds"
+    },
+    {
+      "day": "Monday",
+      "time": "10:30",
+      "class": "Bronze / Puppy",
+      "venueId": "st-edmunds"
+    },
+    {
+      "day": "Monday",
+      "time": "18:30",
+      "class": "Bronze / Silver",
+      "venueId": "new-road"
+    },
+    {
+      "day": "Monday",
+      "time": "19:30",
+      "class": "Gold / Platinum",
+      "venueId": "new-road"
+    },
+    {
+      "day": "Tuesday",
+      "time": "10:30",
+      "class": "Bronze / Silver",
+      "venueId": "st-edmunds"
+    },
+    {
+      "day": "Tuesday",
+      "time": "11:30",
+      "class": "Gold",
+      "venueId": "st-edmunds"
+    },
+    {
+      "day": "Tuesday",
+      "time": "18:30",
+      "class": "Mixed Ability",
+      "venueId": "new-road"
+    },
+    {
+      "day": "Tuesday",
+      "time": "19:30",
+      "class": "Puppy Foundation",
+      "venueId": "new-road",
+      "featured": true
+    },
+    {
+      "day": "Tuesday",
+      "time": "20:30",
+      "class": "Bronze / Silver",
+      "venueId": "new-road"
+    },
+    {
+      "day": "Wednesday",
+      "time": "17:30",
+      "class": "Mixed Ability",
+      "venueId": "new-road"
+    },
+    {
+      "day": "Wednesday",
+      "time": "18:30",
+      "class": "Puppy Foundation",
+      "venueId": "new-road",
+      "featured": true
+    },
+    {
+      "day": "Wednesday",
+      "time": "19:30",
+      "class": "Silver / Gold",
+      "venueId": "new-road"
+    }
+  ],
+  "fees": [
+    {
+      "label": "Adult membership",
+      "amount": "\u00a320",
+      "detail": "when joining \u00b7 \u00a310 renewal each January"
+    },
+    {
+      "label": "Adult class",
+      "amount": "\u00a39",
+      "detail": "per weekly class"
+    },
+    {
+      "label": "Puppy Foundation",
+      "amount": "\u00a380",
+      "detail": "six-week booked course \u00b7 membership included"
+    }
+  ],
+  "classTypes": [
+    {
+      "name": "Puppy Foundation",
+      "badge": "Start here",
+      "description": "A six-week booked course for early socialisation, practical life skills and confident foundations.",
+      "price": "\u00a380",
+      "detail": "six weeks \u00b7 membership included",
+      "featured": true
+    },
+    {
+      "name": "Bronze & Silver",
+      "badge": "Good Citizen",
+      "description": "Build focus, manners, handling and useful everyday skills while working through Good Citizen standards.",
+      "price": "\u00a39",
+      "detail": "per class"
+    },
+    {
+      "name": "Gold & Platinum",
+      "badge": "Advanced",
+      "description": "Advanced training for established partnerships looking to strengthen reliability and keep learning together.",
+      "price": "\u00a39",
+      "detail": "per class"
+    },
+    {
+      "name": "Mixed Ability",
+      "badge": "Ongoing",
+      "description": "Friendly ongoing training with support matched to the dog-and-owner partnership in front of us.",
+      "price": "\u00a39",
+      "detail": "per class"
+    }
+  ]
+}

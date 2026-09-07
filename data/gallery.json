@@ -1,0 +1,22 @@
+[
+  {
+    "id": "current-site-1",
+    "year": "2026",
+    "category": "Training",
+    "src": "assets/images/current-site-hero.png",
+    "alt": "Dog working attentively with a handler during a training exercise",
+    "caption": "Training together",
+    "fit": "natural",
+    "focalPoint": "50% 45%"
+  },
+  {
+    "id": "current-site-2",
+    "year": "2026",
+    "category": "Training",
+    "src": "assets/images/current-site-gallery-1.png",
+    "alt": "Black dog moving beside a handler during training",
+    "caption": "Learning in motion",
+    "fit": "natural",
+    "focalPoint": "62% 45%"
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "brand": {
+    "name": "CHeWs Dog Training",
+    "shortName": "CHeWs",
+    "tagline": "Socialisation and obedience training for pet dogs",
+    "location": "Chingford, London",
+    "established": 2012
+  },
+  "contact": {
+    "phoneDisplay": "07732 306543",
+    "phoneHref": "+447732306543",
+    "whatsapp": "https://wa.me/447732306543"
+  },
+  "socials": [
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "handle": "@chewsdog",
+      "url": "https://www.instagram.com/chewsdog/"
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook group",
+      "handle": "CHeWs Dog Training community",
+      "url": "https://www.facebook.com/groups/507503316041136/"
+    }
+  ],
+  "notice": {
+    "enabled": false,
+    "text": ""
+  },
+  "stats": [
+    {
+      "value": "2012",
+      "label": "CHeWs opened"
+    },
+    {
+      "value": "12",
+      "label": "indoor classes each week"
+    },
+    {
+      "value": "\u00a357k+",
+      "label": "raised for charities"
+    },
+    {
+      "value": "2023",
+      "label": "RKC Listed Status Club of the Year"
+    }
+  ]
+}

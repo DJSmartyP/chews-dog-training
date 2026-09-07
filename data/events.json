@@ -1,0 +1,32 @@
+[
+  {
+    "id": "copped-hall-2026",
+    "date": "2026-08-23",
+    "title": "Copped Hall open day",
+    "time": "11am · dog show starts at 1pm · finishes 4pm",
+    "venue": "Copped Hall",
+    "address": "Sat Nav: CM16 5HR · What3Words: stow.crab.record",
+    "description": "CHeWs organised the fun dog show as part of the Copped Hall open day.",
+    "published": true
+  },
+  {
+    "id": "picnic-park-2026",
+    "date": "2026-09-06",
+    "title": "CHeWs dog show at Picnic in the Park",
+    "time": "11:30am · dog show starts at 1pm · finishes 4:30pm",
+    "venue": "The Highams Park",
+    "address": "Henry's Avenue, IG8 9RB",
+    "description": "A CHeWs dog show in aid of The Cinnamon Trust, sponsored by Breens estate agents as part of Picnic in the Park.",
+    "published": true
+  },
+  {
+    "id": "quiz-dnv-2026",
+    "date": "2026-09-19",
+    "title": "Quiz night for DNV Rescue",
+    "time": "Doors 7pm · quiz starts 7:30pm · finishes around 10:30pm",
+    "venue": "St Edmunds Church",
+    "address": "216 Chingford Mount Road, London E4 8JL",
+    "description": "CHeWs quiz night is raising funds for DNV Rescue. Tickets are £10 per person, or £20 with a fish or chicken & chip supper.",
+    "published": true
+  }
+]

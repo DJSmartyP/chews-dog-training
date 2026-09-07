@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sarah",
+    "name": "Sarah",
+    "role": "Principal Instructor",
+    "photo": "",
+    "photoPosition": "50% 30%",
+    "intro": "Sarah has been instructing since 2000 and is an examiner for the Royal Kennel Club Good Citizen Dog Scheme at all levels. She is also a canine first aider.",
+    "detail": "Her current dogs are rescue crossbreed Dougal, who has his Gold GCDS and a Bronze sniffer dog award, and Norfolk terrier Toby, who has his Bronze GCDS and eight first places at Crufts.",
+    "chips": [
+      "Instructing since 2000",
+      "RKC GCDS Examiner",
+      "Canine First Aider"
+    ]
+  }
+]
