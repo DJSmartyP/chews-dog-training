@@ -47,7 +47,7 @@ function venueLegend(data){return `<div class="venue-legend">${data.venues.map(v
 
 function renderClassCards(data, target='#class-grid'){
   const el=$(target); if(!el)return;
-  el.innerHTML=data.classTypes.map(item=>`<article class="class-card ${item.featured?'featured':''}">${item.image?`<div class="class-art"><img src="${asset(item.image)}" alt="${esc(item.name)}"></div>`:''}<div class="class-card-body"><span class="class-badge">${esc(item.badge)}</span><h3>${esc(item.name)}</h3><p>${esc(item.description)}</p><div class="class-price"><strong>${esc(item.price)}</strong><span>${esc(item.detail)}</span></div></div></article>`).join('');
+  el.innerHTML=data.classTypes.map(item=>`<article class="class-card ${item.featured?'featured':''}"><div class="class-card-head"><span class="class-badge">${esc(item.badge)}</span>${item.image?`<span class="class-art"><img src="${asset(item.image)}" alt=""></span>`:''}</div><h3>${esc(item.name)}</h3><p>${esc(item.description)}</p><div class="class-price"><strong>${esc(item.price)}</strong><span>${esc(item.detail)}</span></div></article>`).join('');
 }
 function classArtFor(data,name){
   const n=String(name).toLowerCase();
@@ -66,7 +66,7 @@ function renderDaySchedule(data){
 }
 function renderFees(data){const el=$('#fees-grid'); if(el)el.innerHTML=data.fees.map(x=>`<div class="fee"><span>${esc(x.label)}</span><strong>${esc(x.amount)}</strong><small>${esc(x.detail)}</small></div>`).join('')}
 function renderMaps(data,target='#map-grid'){
-  const el=$(target); if(!el)return; el.innerHTML=data.venues.map(v=>`<article class="map-card tone-${esc(v.tone)}"><div class="map-bar"><div><h3>${esc(v.name)}</h3><p>${esc(v.address)}</p></div><a class="directions" target="_blank" rel="noopener" href="${mapUrl(v.mapsQuery)}">Get directions ↗</a></div>${v.image?`<img class="map-venue-art" src="${asset(v.image)}" alt="${esc(v.name)}">`:''}<div class="map-frame"><span class="map-pin-label">${esc(v.label)}</span><iframe title="Map showing ${esc(v.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${mapEmbed(v.mapsQuery)}"></iframe></div></article>`).join('')
+  const el=$(target); if(!el)return; el.innerHTML=data.venues.map(v=>`<article class="map-card tone-${esc(v.tone)}"><div class="map-bar"><div><h3>${esc(v.name)}</h3><p>${esc(v.address)}</p></div><a class="directions" target="_blank" rel="noopener" href="${mapUrl(v.mapsQuery)}">Get directions ↗</a></div><div class="map-frame"><span class="map-pin-label">${esc(v.label)}</span><iframe title="Map showing ${esc(v.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${mapEmbed(v.mapsQuery)}"></iframe></div></article>`).join('')
 }
 function setupScheduleSwitch(){ $$('.view-btn').forEach(btn=>btn.addEventListener('click',()=>{$$('.view-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');$$('.schedule-view').forEach(v=>v.classList.toggle('active',v.id===`${btn.dataset.view}-view`))})) }
 function trainerSlide(p){return `<article class="trainer-slide"><div class="trainer-photo">${p.photo?`<img src="${asset(p.photo)}" alt="${esc(p.name)}" style="object-position:${esc(p.photoPosition||'50% 35%')}">`:`<div class="profile-placeholder"><img src="${asset('assets/logo/chews-mark.png')}" alt=""><span>Trainer photo coming soon</span></div>`}</div><div class="trainer-copy"><span class="eyebrow">${esc(p.role)}</span><h3>${esc(p.name)}</h3><p>${esc(p.intro)}</p><p>${esc(p.detail)}</p><div class="chips">${(p.chips||[]).map(c=>`<span>${esc(c)}</span>`).join('')}</div></div></article>`}
