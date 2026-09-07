@@ -1,15 +1,11 @@
-CHeWs v5.3 delta update
+CHeWs v5.4 layout fix delta
 
-Drop these files over the current v5.2 site.
+Drop these files over v5.3.
 
-Includes:
-- all 10 new PNG illustration assets
-- professional customer-facing copy rewrite
-- prominent CHeWs logo use
-- green + gold venue colour system
-- less-cartoon typography (DM Sans + Source Sans 3)
-- button contrast fixes
-- prominent suitability / not-a-behaviourist guidance
-- what-to-bring guidance near the top of Home and Classes
-- class artwork used in cards and timetable
-- venue artwork used in timetable, contact and map cards
+This update restores the previous menu/page composition, keeps the new professional copy and green/gold palette, and changes the new PNG artwork to context-specific visual cues only:
+- class images: class cards and matching timetable entries
+- venue images: their own venue cards only
+- About/Gallery/Events/Contact images: their own page headers only
+- no page artwork is reused as unrelated homepage decoration
+
+Also retains the trainer portrait crop fix and button-contrast fixes.
