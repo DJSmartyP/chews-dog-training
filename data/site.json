@@ -2,7 +2,7 @@
   "brand": {
     "name": "CHeWs Dog Training",
     "shortName": "CHeWs",
-    "tagline": "Socialisation and obedience training for pet dogs",
+    "tagline": "Friendly, reward-based training for pet dogs",
     "location": "Chingford, London",
     "established": 2012
   },
@@ -32,19 +32,19 @@
   "stats": [
     {
       "value": "2012",
-      "label": "CHeWs opened"
+      "label": "supporting local dogs and owners since"
     },
     {
       "value": "12",
-      "label": "indoor classes each week"
+      "label": "indoor classes every week"
     },
     {
-      "value": "\u00a357k+",
-      "label": "raised for charities"
+      "value": "£57k+",
+      "label": "raised for charities and good causes"
     },
     {
       "value": "2023",
-      "label": "RKC Listed Status Club of the Year"
+      "label": "Royal Kennel Club Listed Status Club of the Year"
     }
   ]
 }

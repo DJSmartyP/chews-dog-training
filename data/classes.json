@@ -6,8 +6,9 @@
       "shortName": "St Edmunds",
       "address": "216 Chingford Mount Road, London E4 8JL",
       "mapsQuery": "St Edmunds Church, 216 Chingford Mount Road, London E4 8JL",
-      "tone": "teal",
-      "label": "St Edmunds"
+      "tone": "green",
+      "label": "St Edmunds",
+      "image": "assets/images/illustrations/st-edmunds.png"
     },
     {
       "id": "new-road",
@@ -15,8 +16,9 @@
       "shortName": "New Road Methodist",
       "address": "New Road, London E4 9EU",
       "mapsQuery": "New Road Methodist Church, New Road, London E4 9EU",
-      "tone": "amber",
-      "label": "New Road Methodist"
+      "tone": "gold",
+      "label": "New Road Methodist",
+      "image": "assets/images/illustrations/new-road-methodist.png"
     }
   ],
   "schedule": [
@@ -98,49 +100,53 @@
   "fees": [
     {
       "label": "Adult membership",
-      "amount": "\u00a320",
-      "detail": "when joining \u00b7 \u00a310 renewal each January"
+      "amount": "£20",
+      "detail": "when joining · £10 renewal each January"
     },
     {
       "label": "Adult class",
-      "amount": "\u00a39",
+      "amount": "£9",
       "detail": "per weekly class"
     },
     {
       "label": "Puppy Foundation",
-      "amount": "\u00a380",
-      "detail": "six-week booked course \u00b7 membership included"
+      "amount": "£80",
+      "detail": "six-week booked course · membership included"
     }
   ],
   "classTypes": [
     {
       "name": "Puppy Foundation",
-      "badge": "Start here",
-      "description": "A six-week booked course for early socialisation, practical life skills and confident foundations.",
-      "price": "\u00a380",
-      "detail": "six weeks \u00b7 membership included",
-      "featured": true
+      "badge": "Puppy course",
+      "description": "Give your puppy the best possible start with six weeks of guided socialisation, handling, focus and practical everyday skills.",
+      "price": "£80",
+      "detail": "six weeks · membership included",
+      "featured": true,
+      "image": "assets/images/illustrations/puppy-foundation.png"
     },
     {
       "name": "Bronze & Silver",
       "badge": "Good Citizen",
-      "description": "Build focus, manners, handling and useful everyday skills while working through Good Citizen standards.",
-      "price": "\u00a39",
-      "detail": "per class"
+      "description": "Build calm focus, good manners and practical control while working towards Royal Kennel Club Good Citizen standards.",
+      "price": "£9",
+      "detail": "per class",
+      "image": "assets/images/illustrations/bronze-silver.png"
     },
     {
       "name": "Gold & Platinum",
       "badge": "Advanced",
-      "description": "Advanced training for established partnerships looking to strengthen reliability and keep learning together.",
-      "price": "\u00a39",
-      "detail": "per class"
+      "description": "Keep progressing with more advanced exercises that strengthen reliability, teamwork and confidence in everyday situations.",
+      "price": "£9",
+      "detail": "per class",
+      "image": "assets/images/illustrations/gold-platinum.png"
     },
     {
       "name": "Mixed Ability",
-      "badge": "Ongoing",
-      "description": "Friendly ongoing training with support matched to the dog-and-owner partnership in front of us.",
-      "price": "\u00a39",
-      "detail": "per class"
+      "badge": "Keep progressing",
+      "description": "Friendly ongoing training for dogs and owners who want to practise, progress and enjoy structured learning together.",
+      "price": "£9",
+      "detail": "per class",
+      "image": "assets/images/illustrations/mixed-ability.png"
     }
   ]
 }
