@@ -151,7 +151,7 @@ body{background:var(--paper);background-image:radial-gradient(circle at 20% 0%,r
 .trainer-track{display:flex;transition:transform .45s cubic-bezier(.22,.61,.36,1);will-change:transform}
 .trainer-slide{min-width:100%;display:grid;grid-template-columns:minmax(280px,.75fr) 1.25fr;min-height:390px}
 .trainer-photo{background:linear-gradient(145deg,#eaf7f0,#fff7e9);display:grid;place-items:center;overflow:hidden}
-.trainer-photo>img{width:100%;height:100%;object-fit:cover}
+.trainer-photo>img{width:min(88%,420px);height:min(88%,420px);object-fit:contain;filter:drop-shadow(0 14px 24px rgba(20,72,54,.12))}
 .trainer-copy{padding:46px 80px 56px 46px;display:flex;flex-direction:column;justify-content:center}
 .trainer-copy h3{font-family:"Fredoka","Trebuchet MS",sans-serif;font-size:clamp(2.6rem,5vw,4.6rem);line-height:1;margin:.15rem 0 .9rem;letter-spacing:-.035em}
 .trainer-copy p{color:var(--ink-2);max-width:720px}
@@ -176,3 +176,7 @@ body{background:var(--paper);background-image:radial-gradient(circle at 20% 0%,r
   .site-header .brand-lockup{flex-basis:205px;max-width:205px}.brand.brand-lockup img{height:45px}.footer-lockup img{height:58px}
   .trainer-photo{min-height:260px}.trainer-copy{padding:30px 28px 62px}.carousel-btn{top:auto;bottom:14px;transform:none;width:42px;height:42px}.carousel-btn.prev{left:16px}.carousel-btn.next{left:64px;right:auto}.carousel-dots{right:20px;bottom:28px}
 }
+
+/* v5.2 trainer portraits: preserve full faces instead of centre-cropping */
+.trainer-photo{padding:22px;background:linear-gradient(145deg,#dff5e8,#fff8e8)}
+@media(max-width:640px){.trainer-photo{min-height:300px;padding:18px}.trainer-photo>img{width:min(84vw,360px);height:min(84vw,360px)}}
