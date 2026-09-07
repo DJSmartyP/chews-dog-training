@@ -17,15 +17,15 @@ function injectShell(site){
     ['home','Home'],['classes','Classes & timetable'],['about','About'],['gallery','Gallery'],['events','Events'],['contact','Contact']
   ];
   header.innerHTML = `<div class="container header-inner">
-    <a class="brand" href="${linkTo('home')}" aria-label="CHeWs Dog Training home">
-      <img src="${asset('assets/logo/chews-mark.png')}" alt=""><span class="brand-copy"><strong>CHeWs</strong><small>Dog Training</small></span>
+    <a class="brand brand-lockup" href="${linkTo('home')}" aria-label="CHeWs Dog Training home">
+      <img src="${asset('assets/logo/chews-lockup.png')}" alt="CHeWs Dog Training">
     </a>
     <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">${nav.map(([slug,label])=>`<a class="${p===slug?'active':''}" href="${linkTo(slug)}">${label}</a>`).join('')}</nav>
     <a class="header-cta js-whatsapp" href="${esc(site.contact.whatsapp)}">Message Sarah →</a>
   </div>`;
   footer.innerHTML = `<div class="container footer-grid">
-    <div class="footer-brand"><a class="brand" href="${linkTo('home')}"><img src="${asset('assets/logo/chews-mark.png')}" alt=""><span class="brand-copy"><strong>CHeWs</strong><small>Dog Training</small></span></a><p>${esc(site.brand.tagline)} in ${esc(site.brand.location)} using gentle, firm and reward-based methods.</p></div>
+    <div class="footer-brand"><a class="brand brand-lockup footer-lockup" href="${linkTo('home')}"><img src="${asset('assets/logo/chews-lockup.png')}" alt="CHeWs Dog Training"></a><p>${esc(site.brand.tagline)} in ${esc(site.brand.location)} using gentle, firm and reward-based methods.</p></div>
     <div><h4>Explore</h4><nav>${nav.slice(1).map(([slug,label])=>`<a href="${linkTo(slug)}">${label}</a>`).join('')}</nav></div>
     <div><h4>Contact</h4><div class="footer-links"><a href="tel:${esc(site.contact.phoneHref)}">${esc(site.contact.phoneDisplay)}</a><a href="${esc(site.contact.whatsapp)}">WhatsApp CHeWs</a>${(site.socials||[]).map(x=>`<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.label)}</a>`).join('')}</div></div>
   </div><div class="container footer-bottom"><span>© <span id="year"></span> CHeWs Dog Training</span><span>Pet dog socialisation & training club · not a behaviourist service</span></div>`;
@@ -62,14 +62,33 @@ function renderMaps(data,target='#map-grid'){
   const el=$(target); if(!el)return; el.innerHTML=data.venues.map(v=>`<article class="map-card tone-${esc(v.tone)}"><div class="map-bar"><div><h3>${esc(v.name)}</h3><p>${esc(v.address)}</p></div><a class="directions" target="_blank" rel="noopener" href="${mapUrl(v.mapsQuery)}">Directions ↗</a></div><div class="map-frame"><span class="map-pin-label">${esc(v.label)}</span><iframe title="Map showing ${esc(v.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${mapEmbed(v.mapsQuery)}"></iframe></div></article>`).join('')
 }
 function setupScheduleSwitch(){ $$('.view-btn').forEach(btn=>btn.addEventListener('click',()=>{$$('.view-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');$$('.schedule-view').forEach(v=>v.classList.toggle('active',v.id===`${btn.dataset.view}-view`))})) }
-function renderTeam(team){const el=$('#team-grid');if(!el)return;el.innerHTML=team.map(p=>`<article class="profile-card"><div class="profile-visual">${p.photo?`<img src="${asset(p.photo)}" alt="${esc(p.name)}" style="object-position:${esc(p.photoPosition||'50% 35%')}">`:`<div class="profile-placeholder"><img src="${asset('assets/logo/chews-mark.png')}" alt=""><span>Profile photo can be added here</span></div>`}</div><div class="profile-copy"><span class="eyebrow">${esc(p.role)}</span><h3>${esc(p.name)}</h3><p>${esc(p.intro)}</p><p>${esc(p.detail)}</p><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div></div></article>`).join('')}
+function trainerSlide(p){return `<article class="trainer-slide"><div class="trainer-photo">${p.photo?`<img src="${asset(p.photo)}" alt="${esc(p.name)}" style="object-position:${esc(p.photoPosition||'50% 35%')}">`:`<div class="profile-placeholder"><img src="${asset('assets/logo/chews-mark.png')}" alt=""><span>Trainer photo coming soon</span></div>`}</div><div class="trainer-copy"><span class="eyebrow">${esc(p.role)}</span><h3>${esc(p.name)}</h3><p>${esc(p.intro)}</p><p>${esc(p.detail)}</p><div class="chips">${(p.chips||[]).map(c=>`<span>${esc(c)}</span>`).join('')}</div></div></article>`}
+function renderTrainerCarousel(team,target){
+  const el=$(target);if(!el)return;
+  if(!team.length){el.innerHTML='<div class="empty-state">Trainer profiles will appear here.</div>';return}
+  el.innerHTML=`<div class="trainer-carousel" tabindex="0"><div class="trainer-track">${team.map(trainerSlide).join('')}</div>${team.length>1?`<button class="carousel-btn prev" type="button" aria-label="Previous trainer">‹</button><button class="carousel-btn next" type="button" aria-label="Next trainer">›</button><div class="carousel-dots">${team.map((_,i)=>`<button type="button" class="carousel-dot ${i===0?'active':''}" aria-label="Show trainer ${i+1}" data-index="${i}"></button>`).join('')}</div>`:''}</div>`;
+  if(team.length<2)return;
+  const carousel=$('.trainer-carousel',el),track=$('.trainer-track',el),dots=$$('.carousel-dot',el);let i=0;
+  const go=n=>{i=(n+team.length)%team.length;track.style.transform=`translateX(-${i*100}%)`;dots.forEach((d,j)=>d.classList.toggle('active',j===i))};
+  $('.prev',el).addEventListener('click',()=>go(i-1));$('.next',el).addEventListener('click',()=>go(i+1));dots.forEach(d=>d.addEventListener('click',()=>go(Number(d.dataset.index))));
+  carousel.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(i-1);if(e.key==='ArrowRight')go(i+1)});
+}
+function renderTeam(team){renderTrainerCarousel(team,'#team-grid')}
 function renderGallery(items){
   const tabs=$('#gallery-tabs'),grid=$('#gallery-grid');if(!tabs||!grid)return;const years=[...new Set(items.map(i=>i.year))].sort((a,b)=>b.localeCompare(a));
   const draw=year=>{grid.innerHTML=items.filter(i=>i.year===year).map(i=>`<figure class="gallery-item" data-src="${asset(i.src)}" data-alt="${esc(i.alt)}"><button class="gallery-open" type="button"><img loading="lazy" src="${asset(i.src)}" alt="${esc(i.alt)}"><span class="gallery-caption"><strong>${esc(i.caption)}</strong><small>${esc(i.category)} · ${esc(i.year)}</small></span></button></figure>`).join('');$$('.gallery-open',grid).forEach(b=>b.addEventListener('click',()=>{const f=b.closest('.gallery-item');$('#lightbox-img').src=f.dataset.src;$('#lightbox-img').alt=f.dataset.alt;$('#lightbox').showModal()}))};
   tabs.innerHTML=years.map((y,i)=>`<button class="gallery-tab ${i===0?'active':''}" data-year="${esc(y)}">${esc(y)}</button>`).join('');$$('.gallery-tab',tabs).forEach(t=>t.addEventListener('click',()=>{$$('.gallery-tab',tabs).forEach(x=>x.classList.remove('active'));t.classList.add('active');draw(t.dataset.year)}));if(years[0])draw(years[0]);
   $('#lightbox-close').addEventListener('click',()=>$('#lightbox').close());$('#lightbox').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.close()});
 }
-function eventCard(e){const d=new Date(`${e.date}T12:00:00`);return `<article class="event-card"><div class="event-date"><span>${d.toLocaleDateString('en-GB',{month:'short'}).toUpperCase()}</span><strong>${d.getDate()}</strong></div><div class="event-copy"><h3>${esc(e.title)}</h3><p class="event-meta">${esc(e.time)}</p><p>${esc(e.description)}</p><p><strong>${esc(e.venue)}</strong><br>${esc(e.address)}</p></div></article>`}
+function eventCard(e,opts={}){const d=new Date(`${e.date}T12:00:00`),today=new Date();today.setHours(0,0,0,0);const past=d<today;return `<article class="event-card ${past?'is-past':''}"><div class="event-date"><span>${d.toLocaleDateString('en-GB',{month:'short'}).toUpperCase()}</span><strong>${d.getDate()}</strong>${past&&opts.showStatus?'<small>Past</small>':''}</div><div class="event-copy"><h3>${esc(e.title)}</h3><p class="event-meta">${esc(e.time)}</p><p>${esc(e.description)}</p><p><strong>${esc(e.venue)}</strong><br>${esc(e.address)}</p></div></article>`}
+function renderHomeEvents(events){
+  const el=$('#home-events');if(!el)return;const today=new Date();today.setHours(0,0,0,0);
+  const published=events.filter(e=>e.published).sort((a,b)=>a.date.localeCompare(b.date));
+  const future=published.filter(e=>new Date(`${e.date}T00:00:00`)>=today).slice(0,3);
+  const recent=published.filter(e=>new Date(`${e.date}T00:00:00`)<today).sort((a,b)=>b.date.localeCompare(a.date));
+  const shown=[...future,...recent.slice(0,Math.max(0,3-future.length))];
+  el.innerHTML=shown.length?shown.map(e=>eventCard(e,{showStatus:true})).join(''):`<div class="empty-state">No events currently listed.</div>`;
+}
 function renderEvents(events){const up=$('#upcoming-events'),past=$('#past-events');if(!up)return;const today=new Date();today.setHours(0,0,0,0);const published=events.filter(e=>e.published).sort((a,b)=>a.date.localeCompare(b.date));const future=published.filter(e=>new Date(`${e.date}T00:00:00`)>=today),old=published.filter(e=>new Date(`${e.date}T00:00:00`)<today).reverse();up.innerHTML=future.length?future.map(eventCard).join(''):`<div class="empty-state"><strong>No upcoming events listed yet.</strong><br>New dates will appear here once added.</div>`;if(past)past.innerHTML=old.length?old.map(eventCard).join(''):`<div class="empty-state">No archived events yet.</div>`}
 
 function renderSocials(site){
@@ -82,7 +101,7 @@ async function init(){
   try{
     const site=await CHEWS_CONTENT.site(); injectShell(site); renderStats(site); renderSocials(site);
     const p=page();
-    if(p==='home') { const [classes,events]=await Promise.all([CHEWS_CONTENT.classes(),CHEWS_CONTENT.events()]); renderClassCards(classes,'#class-grid'); const now=new Date();now.setHours(0,0,0,0);const next=events.filter(e=>e.published&&new Date(`${e.date}T00:00:00`)>=now).sort((a,b)=>a.date.localeCompare(b.date))[0];const slot=$('#next-event');if(slot)slot.innerHTML=next?eventCard(next):`<div class="empty-state">No upcoming event currently listed.</div>`; }
+    if(p==='home') { const [classes,events,team]=await Promise.all([CHEWS_CONTENT.classes(),CHEWS_CONTENT.events(),CHEWS_CONTENT.team()]); renderClassCards(classes,'#class-grid'); renderHomeEvents(events); renderTrainerCarousel(team,'#home-team-carousel'); }
     if(p==='classes') { const data=await CHEWS_CONTENT.classes(); $('#venue-legend-root').innerHTML=venueLegend(data); renderClassCards(data); renderVenueSchedule(data); renderDaySchedule(data);renderFees(data);renderMaps(data);setupScheduleSwitch(); }
     if(p==='about'){ const team=await CHEWS_CONTENT.team(); renderTeam(team); }
     if(p==='gallery'){ const g=await CHEWS_CONTENT.gallery(); renderGallery(g); }
