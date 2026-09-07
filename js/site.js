@@ -22,10 +22,10 @@ function injectShell(site){
     </a>
     <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">${nav.map(([slug,label])=>`<a class="${p===slug?'active':''}" href="${linkTo(slug)}">${label}</a>`).join('')}</nav>
-    <a class="header-cta js-whatsapp" href="${esc(site.contact.whatsapp)}">Message Sarah →</a>
+    <a class="header-cta js-whatsapp" href="${esc(site.contact.whatsapp)}">WhatsApp CHeWs →</a>
   </div>`;
   footer.innerHTML = `<div class="container footer-grid">
-    <div class="footer-brand"><a class="brand brand-lockup footer-lockup" href="${linkTo('home')}"><img src="${asset('assets/logo/chews-lockup.png')}" alt="CHeWs Dog Training"></a><p>${esc(site.brand.tagline)} in ${esc(site.brand.location)} using gentle, firm and reward-based methods.</p></div>
+    <div class="footer-brand"><a class="brand brand-lockup footer-lockup" href="${linkTo('home')}"><img src="${asset('assets/logo/chews-lockup.png')}" alt="CHeWs Dog Training"></a><p>${esc(site.brand.tagline)} in ${esc(site.brand.location)}. Practical group training that helps dogs and owners enjoy everyday life together.</p></div>
     <div><h4>Explore</h4><nav>${nav.slice(1).map(([slug,label])=>`<a href="${linkTo(slug)}">${label}</a>`).join('')}</nav></div>
     <div><h4>Contact</h4><div class="footer-links"><a href="tel:${esc(site.contact.phoneHref)}">${esc(site.contact.phoneDisplay)}</a><a href="${esc(site.contact.whatsapp)}">WhatsApp CHeWs</a>${(site.socials||[]).map(x=>`<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.label)}</a>`).join('')}</div></div>
   </div><div class="container footer-bottom"><span>© <span id="year"></span> CHeWs Dog Training</span><span>Pet dog socialisation & training club · not a behaviourist service</span></div>`;
@@ -47,19 +47,26 @@ function venueLegend(data){return `<div class="venue-legend">${data.venues.map(v
 
 function renderClassCards(data, target='#class-grid'){
   const el=$(target); if(!el)return;
-  el.innerHTML=data.classTypes.map(item=>`<article class="class-card ${item.featured?'featured':''}"><span class="class-badge">${esc(item.badge)}</span><h3>${esc(item.name)}</h3><p>${esc(item.description)}</p><div class="class-price"><strong>${esc(item.price)}</strong><span>${esc(item.detail)}</span></div></article>`).join('');
+  el.innerHTML=data.classTypes.map(item=>`<article class="class-card ${item.featured?'featured':''}">${item.image?`<div class="class-art"><img src="${asset(item.image)}" alt="${esc(item.name)}"></div>`:''}<div class="class-card-body"><span class="class-badge">${esc(item.badge)}</span><h3>${esc(item.name)}</h3><p>${esc(item.description)}</p><div class="class-price"><strong>${esc(item.price)}</strong><span>${esc(item.detail)}</span></div></div></article>`).join('');
+}
+function classArtFor(data,name){
+  const n=String(name).toLowerCase();
+  if(n.includes('puppy')) return data.classTypes.find(x=>x.name==='Puppy Foundation')?.image;
+  if(n.includes('gold') || n.includes('platinum')) return data.classTypes.find(x=>x.name==='Gold & Platinum')?.image;
+  if(n.includes('mixed')) return data.classTypes.find(x=>x.name==='Mixed Ability')?.image;
+  return data.classTypes.find(x=>x.name==='Bronze & Silver')?.image;
 }
 function renderVenueSchedule(data){
   const el=$('#venue-view'); if(!el)return;
-  el.innerHTML=data.venues.map(v=>{const sessions=data.schedule.filter(s=>s.venueId===v.id);const days=[...new Set(sessions.map(s=>s.day))];return `<article class="venue-card tone-${esc(v.tone)}"><div class="venue-card-head"><div><span class="venue-label">${esc(v.label)}</span><h3>${esc(v.name)}</h3><p>${esc(v.address)}</p></div><a class="directions" target="_blank" rel="noopener" href="${mapUrl(v.mapsQuery)}">Directions ↗</a></div><div class="venue-day-grid">${days.map(day=>`<section class="venue-day"><h4>${esc(day)}</h4>${sessions.filter(s=>s.day===day).map(s=>`<div class="session ${s.featured?'puppy':''}"><time>${esc(s.time)}</time><strong>${esc(s.class)}</strong></div>`).join('')}</section>`).join('')}</div></article>`}).join('');
+  el.innerHTML=data.venues.map(v=>{const sessions=data.schedule.filter(s=>s.venueId===v.id);const days=[...new Set(sessions.map(s=>s.day))];return `<article class="venue-card tone-${esc(v.tone)}"><div class="venue-card-head"><div class="venue-head-copy"><span class="venue-label">${esc(v.label)}</span><h3>${esc(v.name)}</h3><p>${esc(v.address)}</p><a class="directions" target="_blank" rel="noopener" href="${mapUrl(v.mapsQuery)}">Get directions ↗</a></div>${v.image?`<img class="venue-art" src="${asset(v.image)}" alt="${esc(v.name)}">`:''}</div><div class="venue-day-grid">${days.map(day=>`<section class="venue-day"><h4>${esc(day)}</h4>${sessions.filter(s=>s.day===day).map(s=>{const art=classArtFor(data,s.class);return `<div class="session ${s.featured?'puppy':''}">${art?`<img class="session-art" src="${asset(art)}" alt="">`:''}<time>${esc(s.time)}</time><strong>${esc(s.class)}</strong></div>`}).join('')}</section>`).join('')}</div></article>`}).join('');
 }
 function renderDaySchedule(data){
   const el=$('#day-view'); if(!el)return; const days=['Monday','Tuesday','Wednesday'];
-  el.innerHTML=`<div class="day-cards">${days.map(day=>`<article class="day-card"><h3>${day}</h3>${data.schedule.filter(s=>s.day===day).map(s=>{const v=venueLookup(data,s.venueId);return `<div class="day-session tone-${esc(v.tone)}"><time>${esc(s.time)}</time><span><strong>${esc(s.class)}</strong><small>${esc(v.shortName)}</small></span></div>`}).join('')}</article>`).join('')}</div>`;
+  el.innerHTML=`<div class="day-cards">${days.map(day=>`<article class="day-card"><h3>${day}</h3>${data.schedule.filter(s=>s.day===day).map(s=>{const v=venueLookup(data,s.venueId),art=classArtFor(data,s.class);return `<div class="day-session tone-${esc(v.tone)}">${art?`<img class="session-art" src="${asset(art)}" alt="">`:''}<time>${esc(s.time)}</time><span><strong>${esc(s.class)}</strong><small>${esc(v.shortName)}</small></span></div>`}).join('')}</article>`).join('')}</div>`;
 }
 function renderFees(data){const el=$('#fees-grid'); if(el)el.innerHTML=data.fees.map(x=>`<div class="fee"><span>${esc(x.label)}</span><strong>${esc(x.amount)}</strong><small>${esc(x.detail)}</small></div>`).join('')}
 function renderMaps(data,target='#map-grid'){
-  const el=$(target); if(!el)return; el.innerHTML=data.venues.map(v=>`<article class="map-card tone-${esc(v.tone)}"><div class="map-bar"><div><h3>${esc(v.name)}</h3><p>${esc(v.address)}</p></div><a class="directions" target="_blank" rel="noopener" href="${mapUrl(v.mapsQuery)}">Directions ↗</a></div><div class="map-frame"><span class="map-pin-label">${esc(v.label)}</span><iframe title="Map showing ${esc(v.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${mapEmbed(v.mapsQuery)}"></iframe></div></article>`).join('')
+  const el=$(target); if(!el)return; el.innerHTML=data.venues.map(v=>`<article class="map-card tone-${esc(v.tone)}"><div class="map-bar"><div><h3>${esc(v.name)}</h3><p>${esc(v.address)}</p></div><a class="directions" target="_blank" rel="noopener" href="${mapUrl(v.mapsQuery)}">Get directions ↗</a></div>${v.image?`<img class="map-venue-art" src="${asset(v.image)}" alt="${esc(v.name)}">`:''}<div class="map-frame"><span class="map-pin-label">${esc(v.label)}</span><iframe title="Map showing ${esc(v.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${mapEmbed(v.mapsQuery)}"></iframe></div></article>`).join('')
 }
 function setupScheduleSwitch(){ $$('.view-btn').forEach(btn=>btn.addEventListener('click',()=>{$$('.view-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');$$('.schedule-view').forEach(v=>v.classList.toggle('active',v.id===`${btn.dataset.view}-view`))})) }
 function trainerSlide(p){return `<article class="trainer-slide"><div class="trainer-photo">${p.photo?`<img src="${asset(p.photo)}" alt="${esc(p.name)}" style="object-position:${esc(p.photoPosition||'50% 35%')}">`:`<div class="profile-placeholder"><img src="${asset('assets/logo/chews-mark.png')}" alt=""><span>Trainer photo coming soon</span></div>`}</div><div class="trainer-copy"><span class="eyebrow">${esc(p.role)}</span><h3>${esc(p.name)}</h3><p>${esc(p.intro)}</p><p>${esc(p.detail)}</p><div class="chips">${(p.chips||[]).map(c=>`<span>${esc(c)}</span>`).join('')}</div></div></article>`}
@@ -89,24 +96,11 @@ function renderHomeEvents(events){
   const shown=[...future,...recent.slice(0,Math.max(0,3-future.length))];
   el.innerHTML=shown.length?shown.map(e=>eventCard(e,{showStatus:true})).join(''):`<div class="empty-state">No events currently listed.</div>`;
 }
-function renderEvents(events){const up=$('#upcoming-events'),past=$('#past-events');if(!up)return;const today=new Date();today.setHours(0,0,0,0);const published=events.filter(e=>e.published).sort((a,b)=>a.date.localeCompare(b.date));const future=published.filter(e=>new Date(`${e.date}T00:00:00`)>=today),old=published.filter(e=>new Date(`${e.date}T00:00:00`)<today).reverse();up.innerHTML=future.length?future.map(eventCard).join(''):`<div class="empty-state"><strong>No upcoming events listed yet.</strong><br>New dates will appear here once added.</div>`;if(past)past.innerHTML=old.length?old.map(eventCard).join(''):`<div class="empty-state">No archived events yet.</div>`}
+function renderEvents(events){const up=$('#upcoming-events'),past=$('#past-events');if(!up)return;const today=new Date();today.setHours(0,0,0,0);const published=events.filter(e=>e.published).sort((a,b)=>a.date.localeCompare(b.date));const future=published.filter(e=>new Date(`${e.date}T00:00:00`)>=today),old=published.filter(e=>new Date(`${e.date}T00:00:00`)<today).reverse();up.innerHTML=future.length?future.map(eventCard).join(''):`<div class="empty-state"><strong>No upcoming events listed yet.</strong><br>Please check back soon for new dates.</div>`;if(past)past.innerHTML=old.length?old.map(eventCard).join(''):`<div class="empty-state">No recent events to show.</div>`}
 
 function renderSocials(site){
   const el=$('#contact-socials'); if(!el)return;
   el.innerHTML=(site.socials||[]).map(x=>`<a class="social-link ${esc(x.id)}" href="${esc(x.url)}" target="_blank" rel="noopener"><span class="social-icon">${x.id==='instagram'?'◎':'f'}</span><span><strong>${esc(x.label)}</strong><small>${esc(x.handle||'')}</small></span><b>↗</b></a>`).join('');
 }
-function renderContactVenues(data){const el=$('#contact-venues');if(!el)return;el.innerHTML=data.venues.map(v=>`<article class="detail-card"><div class="venue-line"><i class="venue-dot" style="background:var(--${v.tone==='teal'?'teal':'amber'})"></i><h3>${esc(v.name)}</h3></div><p>${esc(v.address)}</p><p style="margin-top:12px"><a class="directions" href="${mapUrl(v.mapsQuery)}" target="_blank" rel="noopener">Directions ↗</a></p></article>`).join('')}
-
-async function init(){
-  try{
-    const site=await CHEWS_CONTENT.site(); injectShell(site); renderStats(site); renderSocials(site);
-    const p=page();
-    if(p==='home') { const [classes,events,team]=await Promise.all([CHEWS_CONTENT.classes(),CHEWS_CONTENT.events(),CHEWS_CONTENT.team()]); renderClassCards(classes,'#class-grid'); renderHomeEvents(events); renderTrainerCarousel(team,'#home-team-carousel'); }
-    if(p==='classes') { const data=await CHEWS_CONTENT.classes(); $('#venue-legend-root').innerHTML=venueLegend(data); renderClassCards(data); renderVenueSchedule(data); renderDaySchedule(data);renderFees(data);renderMaps(data);setupScheduleSwitch(); }
-    if(p==='about'){ const team=await CHEWS_CONTENT.team(); renderTeam(team); }
-    if(p==='gallery'){ const g=await CHEWS_CONTENT.gallery(); renderGallery(g); }
-    if(p==='events'){ const e=await CHEWS_CONTENT.events(); renderEvents(e); }
-    if(p==='contact'){ const c=await CHEWS_CONTENT.classes(); renderContactVenues(c);renderMaps(c,'#contact-map-grid'); }
-  }catch(err){console.error(err);const el=$('#prototype-error');if(el){el.hidden=false;el.textContent='Prototype content could not load. Serve the folder via GitHub Pages or a local web server rather than opening HTML files directly.'}}
-}
+function renderContactVenues(data){const el=$('#contact-venues');if(!el)return;el.innerHTML=data.venues.map(v=>`<article class="detail-card tone-${esc(v.tone)}">${v.image?`<img class="detail-venue-art" src="${asset(v.image)}" alt="${esc(v.name)}">`:''}<div class="venue-line"><i class="venue-dot"></i><h3>${esc(v.name)}</h3></div><p>${esc(v.address)}</p><p style="margin-top:12px"><a class="directions" href="${mapUrl(v.mapsQuery)}" target="_blank" rel="noopener">Get directions ↗</a></p></article>`).join('')}
 document.addEventListener('DOMContentLoaded',init);
