@@ -103,4 +103,59 @@ function renderSocials(site){
   el.innerHTML=(site.socials||[]).map(x=>`<a class="social-link ${esc(x.id)}" href="${esc(x.url)}" target="_blank" rel="noopener"><span class="social-icon">${x.id==='instagram'?'◎':'f'}</span><span><strong>${esc(x.label)}</strong><small>${esc(x.handle||'')}</small></span><b>↗</b></a>`).join('');
 }
 function renderContactVenues(data){const el=$('#contact-venues');if(!el)return;el.innerHTML=data.venues.map(v=>`<article class="detail-card tone-${esc(v.tone)}">${v.image?`<img class="detail-venue-art" src="${asset(v.image)}" alt="${esc(v.name)}">`:''}<div class="venue-line"><i class="venue-dot"></i><h3>${esc(v.name)}</h3></div><p>${esc(v.address)}</p><p style="margin-top:12px"><a class="directions" href="${mapUrl(v.mapsQuery)}" target="_blank" rel="noopener">Get directions ↗</a></p></article>`).join('')}
+async function init(){
+  try{
+    const site=await CHEWS_CONTENT.site();
+    injectShell(site);
+    renderStats(site);
+    renderSocials(site);
+    const p=page();
+    if(p==='home'){
+      const [classes,events,team]=await Promise.all([
+        CHEWS_CONTENT.classes(),
+        CHEWS_CONTENT.events(),
+        CHEWS_CONTENT.team()
+      ]);
+      renderClassCards(classes,'#class-grid');
+      renderHomeEvents(events);
+      renderTrainerCarousel(team,'#home-team-carousel');
+    }
+    if(p==='classes'){
+      const data=await CHEWS_CONTENT.classes();
+      const legend=$('#venue-legend-root');
+      if(legend) legend.innerHTML=venueLegend(data);
+      renderClassCards(data);
+      renderVenueSchedule(data);
+      renderDaySchedule(data);
+      renderFees(data);
+      renderMaps(data);
+      setupScheduleSwitch();
+    }
+    if(p==='about'){
+      const team=await CHEWS_CONTENT.team();
+      renderTeam(team);
+    }
+    if(p==='gallery'){
+      const gallery=await CHEWS_CONTENT.gallery();
+      renderGallery(gallery);
+    }
+    if(p==='events'){
+      const events=await CHEWS_CONTENT.events();
+      renderEvents(events);
+    }
+    if(p==='contact'){
+      const classes=await CHEWS_CONTENT.classes();
+      renderContactVenues(classes);
+      renderMaps(classes,'#contact-map-grid');
+    }
+  }catch(err){
+    console.error(err);
+    const el=$('#prototype-error');
+    if(el){
+      el.hidden=false;
+      el.textContent='Some site content could not load. Please refresh the page.';
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded',init);
